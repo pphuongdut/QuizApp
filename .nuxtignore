@@ -1,0 +1,3 @@
+# For single-file-component separation concern
+pages/**/script.js
+pages/**/config.js
