@@ -7,9 +7,10 @@
     <div class="flex flex-col">
       <el-button
         v-for="(item, index) in answers"
+        :id="'answer' + index"
         :key="'item' + index"
         class="w-100"
-        @click="selectAnswer(item)"
+        @click="handleAnswer(item, $event)"
         v-html="item"
       >
       </el-button>
@@ -45,10 +46,12 @@ export default {
     this.mergeAnswers()
   },
   methods: {
-    selectAnswer(item) {
+    handleAnswer(item) {
       if (this.result.correct_answer == item) {
+        // event.target.classList.add('correct')
         this.$emit('handle-answer', true)
       } else {
+        // event.target.classList.add('wrong')
         this.$emit('handle-answer', false)
       }
     },
@@ -69,5 +72,11 @@ export default {
 <style lang="scss" scoped>
 ::v-deep .el-button {
   margin: 10px 0;
+}
+.correct {
+  background-color: green;
+}
+.wrong {
+  background: red;
 }
 </style>
