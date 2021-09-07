@@ -6,12 +6,19 @@ export const quizMutations = {
   SET: {
     RESULT: 'quiz/SET_RESULT',
     RESPONSE_CODE: 'quiz/SET_RESPONSE_CODE',
+    START_TIME: 'quiz/SET_START_TIME',
+    FINISH_TIME: 'quiz/SET_FINISH_TIME',
   },
 }
 export default {
   SET_RESULT(state, payload) {
     Vue.set(state, 'results', payload)
-    console.log(state.results[0].question)
+  },
+  SET_START_TIME(state, payload) {
+    Vue.set(state, 'start_time', payload)
+  },
+  SET_FINISH_TIME(state, payload) {
+    Vue.set(state, 'finish_time', payload)
   },
   SET_RESPONSE_CODE(state, payload) {
     Vue.set(state, 'response_code', payload)

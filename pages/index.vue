@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <el-button>Default</el-button>
-  </div>
+  <div></div>
 </template>
 
 <script>
 export default {
   components: {},
   layout: 'default',
+  middleware({ redirect }) {
+    return redirect('/home')
+  },
 }
 </script>

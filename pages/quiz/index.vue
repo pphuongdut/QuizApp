@@ -11,9 +11,6 @@
       Câu tiếp
     </el-button>
     <el-button v-else @click="finishQuiz">Kết thúc</el-button>
-    <li>Số câu đúng : {{ code }}</li>
-    <li>Start : {{ start_time }}</li>
-    <li>Finish a : {{ code }}</li>
   </div>
 </template>
 
@@ -30,8 +27,6 @@ export default {
     return {
       current_question: 0,
       code: 0,
-      start_time: 0,
-      finish_time: 0,
     }
   },
   async fetch() {
@@ -50,7 +45,7 @@ export default {
   },
   mounted() {
     this.code = this.response_code
-    this.start_time = this.getCurrentTime()
+    this.$store.commit(quizMutations.SET.START_TIME, this.getCurrentTime())
   },
   methods: {
     ...mapMutations({
@@ -66,7 +61,8 @@ export default {
       this.current_question++
     },
     finishQuiz() {
-      this.finish_time = this.getCurrentTime()
+      this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.code)
+      this.$store.commit(quizMutations.SET.FINISH_TIME, this.getCurrentTime())
       this.$router.push('/result')
     },
     getCurrentTime() {
