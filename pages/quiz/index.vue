@@ -29,6 +29,7 @@ import { Question } from '~/components/uncommon/Question'
 import { mapActions, mapState, mapMutations } from 'vuex'
 import { quizMutations } from '~/store/quiz/mutations'
 import { quizActions } from '~/store/quiz/actions'
+import moment from 'moment'
 export default {
   components: {
     Question,
@@ -73,10 +74,7 @@ export default {
       this.$router.push('/result')
     },
     getCurrentTime() {
-      let today = new Date()
-      return (
-        today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-      )
+      return moment()
     },
   },
 }
