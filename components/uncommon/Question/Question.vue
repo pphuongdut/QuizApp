@@ -6,15 +6,12 @@
     ></h3>
     <div class="flex flex-col">
       <el-button
-        v-for="(item, index) in result.incorrect_answers"
+        v-for="(item, index) in answers"
         :key="'item' + index"
         class="w-100"
         @click="selectAnswer(item)"
+        v-html="item"
       >
-        {{ item }}
-      </el-button>
-      <el-button class="w-100" @click="selectAnswer(result.correct_answer)">
-        {{ result.correct_answer }}
       </el-button>
     </div>
   </div>
@@ -31,27 +28,40 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      answers: [],
+    }
   },
-
+  computed: {},
+  watch: {
+    result: {
+      handler() {
+        this.mergeAnswers()
+      },
+      deep: true,
+    },
+  },
+  created() {
+    this.mergeAnswers()
+  },
   methods: {
     selectAnswer(item) {
       if (this.result.correct_answer == item) {
-        console.log('correct:' + this.result.correct_answer)
         this.$emit('handle-answer', true)
       } else {
         this.$emit('handle-answer', false)
       }
     },
-    // setRandomAnswers() {
-    //   let ans = this.result.incorrect_answers
-    //   // ans.push(this.result.correct_answer)
-    //   ans[ans.length()] = this.result.correct_answer
-    //   ans.sort(function () {
-    //     return 0.5 - Math.random()
-    //   })
-    //   this.answers = ans
-    // },
+    mergeAnswers() {
+      let answers = [
+        ...this.result.incorrect_answers,
+        this.result.correct_answer,
+      ]
+      answers.sort(function () {
+        return 0.5 - Math.random()
+      })
+      this.$set(this, 'answers', answers)
+    },
   },
 }
 </script>

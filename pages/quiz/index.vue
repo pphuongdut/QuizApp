@@ -18,9 +18,9 @@
         Skip question
       </el-button>
     </div>
-    <el-button v-else type="success" @click="finishQuiz"
-      >Click to see result</el-button
-    >
+    <el-button v-else type="success" @click="$router.push('/result')">
+      You finished. Click to see result
+    </el-button>
   </div>
 </template>
 
@@ -67,6 +67,9 @@ export default {
         this.response_code++
       }
       this.current_question++
+      if (this.current_question >= this.results.length) {
+        this.finishQuiz()
+      }
     },
     finishQuiz() {
       this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.response_code)

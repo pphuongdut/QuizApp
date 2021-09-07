@@ -1,43 +1,61 @@
 <template>
-  <el-card
-    shadow="hover"
-    class="flex flex-col justify-center items-center p-5 md:p-10 lg:p-16"
+  <div
+    class="
+      flex flex-col
+      justify-center
+      items-center
+      p-5
+      md:p-10
+      lg:p-16
+      my-5
+      bg-indigo
+      text-white
+      rounded
+      w-11/12
+      md:w-2/3
+      lg:w-1/2
+      mx-auto
+    "
   >
-    <h5 class="uppercase my-4 md:my-10">RESULTS</h5>
+    <h5 class="uppercase my-3 md:my-5 text-center">RESULTS</h5>
     <h2
       v-if="response_code > 7"
-      class="font-bold text-xl md:text-2xl lg:text-3xl"
+      class="font-bold text-center text-xl md:text-2xl lg:text-3xl"
     >
-      YOU PASSED
+      CONGRATS, YOU PASSED
     </h2>
-    <h2 v-else class="font-bold text-xl md:text-2xl lg:text-3xl">YOU FAILED</h2>
-    <div class="text-center rounded bg-indigo p-5 md:p-10">
+    <h2 v-else class="text-center font-bold text-xl md:text-2xl lg:text-3xl">
+      SORRY, YOU FAILED
+    </h2>
+    <div class="text-center rounded my-3 p-5 md:p-10 text-indigo bg-white">
       <small class="uppercase">FInal score</small>
-      <h3 class="text-black text-5xl">{{ response_code }}</h3>
+      <h3 class="text-7xl">{{ response_code }}</h3>
     </div>
-    <p>Thời gian bắt đầu làm : {{ start_time }}</p>
-    <p>Thời gian kết thúc làm : {{ finish_time }}</p>
-    <p>Time : {{ time }}</p>
-  </el-card>
+    <div class="my-3">
+      <p>Start at: {{ start_time }}</p>
+      <p>Finish at: {{ finish_time }}</p>
+      <p>Time : {{ time }}</p>
+    </div>
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import moment from 'moment'
 export default {
-  // middleware: [
-  //   ({ store, redirect }) => {
-  //     const finish_time = store.state.quiz.finish_time
-  //     console.log('finish_time : ', finish_time)
-  //     if (
-  //       finish_time == 0 ||
-  //       finish_time == undefined ||
-  //       finish_time == '01/01/1970'
-  //     ) {
-  //        redirect('/home')
-  //     }
-  //   },
-  // ],
+  middleware: [
+    ({ store, redirect }) => {
+      const finish_time = store.state.quiz.finish_time
+      console.log('finish_time : ', finish_time)
+      if (
+        finish_time == 0 ||
+        finish_time == undefined ||
+        finish_time == '01/01/1970'
+      ) {
+        redirect('/home')
+      }
+    },
+  ],
   computed: {
     ...mapState({
       start_time: (state) => {
