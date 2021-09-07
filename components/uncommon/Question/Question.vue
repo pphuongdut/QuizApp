@@ -1,19 +1,22 @@
 <template>
   <div>
-    <h3>{{ result.question }}</h3>
-    <ul>
+    <h3
+      class="text-xl md:text-2xl lg:text-3xl font-bold my-2 md:my-5 lg:my-10"
+      v-html="result.question"
+    ></h3>
+    <div class="flex flex-col">
       <el-button
         v-for="(item, index) in result.incorrect_answers"
         :key="'item' + index"
         class="w-100"
         @click="selectAnswer(item)"
       >
-        {{ index + 1 }} . {{ item }}
+        {{ item }}
       </el-button>
       <el-button class="w-100" @click="selectAnswer(result.correct_answer)">
         {{ result.correct_answer }}
       </el-button>
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -53,4 +56,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+::v-deep .el-button {
+  margin: 10px 0;
+}
+</style>

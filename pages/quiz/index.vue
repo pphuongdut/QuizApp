@@ -1,16 +1,26 @@
 <template>
-  <div class="text-center h-screen w-screen">
-    <Question
-      :result="results[current_question]"
-      @handle-answer="handleAnswer"
-    />
-    <el-button
+  <div
+    v-loading="$fetchState.pending"
+    class="flex flex-col justify-center items-center h-screen w-screen"
+  >
+    <div
       v-if="current_question < results.length"
-      @click="current_question++"
+      class="w-full md:w-2/3 lg:w-1/2"
     >
-      Câu tiếp
-    </el-button>
-    <el-button v-else @click="finishQuiz">Kết thúc</el-button>
+      <b class="text-green">
+        {{ current_question + 1 }} / {{ results.length }}
+      </b>
+      <Question
+        :result="results[current_question]"
+        @handle-answer="handleAnswer"
+      />
+      <el-button type="text" @click="current_question++">
+        Skip question
+      </el-button>
+    </div>
+    <el-button v-else type="success" @click="finishQuiz"
+      >Click to see result</el-button
+    >
   </div>
 </template>
 
@@ -26,11 +36,12 @@ export default {
   data() {
     return {
       current_question: 0,
-      code: 0,
+      response_code: 0,
     }
   },
   async fetch() {
     // this.results = await store.dispatch(quizActions.GET.RESULTS)
+    await this.clearData()
     await this.getResults()
   },
   computed: {
@@ -38,13 +49,9 @@ export default {
       results: (state) => {
         return state.quiz.results
       },
-      response_code: (state) => {
-        return state.quiz.response_code
-      },
     }),
   },
   mounted() {
-    this.code = this.response_code
     this.$store.commit(quizMutations.SET.START_TIME, this.getCurrentTime())
   },
   methods: {
@@ -56,12 +63,12 @@ export default {
     }),
     handleAnswer(isTrue) {
       if (isTrue) {
-        this.code++
+        this.response_code++
       }
       this.current_question++
     },
     finishQuiz() {
-      this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.code)
+      this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.response_code)
       this.$store.commit(quizMutations.SET.FINISH_TIME, this.getCurrentTime())
       this.$router.push('/result')
     },
