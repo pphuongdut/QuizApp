@@ -94,5 +94,9 @@ export default {
   color: white;
   border-radius: 10px;
   border: 1px solid #ebc217;
+  &:hover {
+    background: #ebc217;
+    color: black;
+  }
 }
 </style>

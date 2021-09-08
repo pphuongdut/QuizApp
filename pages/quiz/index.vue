@@ -14,7 +14,7 @@
       class="count-time flex flex-col justify-center items-center show"
     >
       <b class="text-5xl md:text-7xl">GET READY ! </b>
-      <b class="text-7xl md:text-9xl">{{ timer }}</b>
+      <b class="text-7xl md:text-9xl my-5">{{ timer }}</b>
     </div>
     <b class="my-3 md:my-5 text-center">🏆 Oh my quiz !</b>
     <div
@@ -103,7 +103,7 @@ export default {
         if (this.current_question >= this.results.length) {
           this.finishQuiz()
         }
-      }, 2000)
+      }, 1000)
     },
     finishQuiz() {
       this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.response_code)
@@ -119,6 +119,7 @@ export default {
 
 <style lang="scss" scoped>
 .quiz-container {
+  font-family: 'Titan One', cursive;
   background: #171c33;
   color: white;
   .btn-skip {

@@ -44,7 +44,7 @@ export default {}
     span {
       -webkit-text-stroke-width: 1px;
       -webkit-text-stroke-color: #f2aaaa;
-      font-size: 8vw;
+      font-size: 7.5vw;
       font-weight: bold;
       text-shadow: 0 0px #f3c623, 0 0px #f2aaaa;
       transform: translate(0, 80%) rotate(4deg);
