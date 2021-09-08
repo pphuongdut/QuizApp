@@ -48,10 +48,18 @@ export default {
   methods: {
     handleAnswer(item) {
       if (this.result.correct_answer == item) {
-        // event.target.classList.add('correct')
+        this.$message({
+          showClose: true,
+          message: 'Congrats, correct answer.',
+          type: 'success',
+        })
         this.$emit('handle-answer', true)
       } else {
-        // event.target.classList.add('wrong')
+        this.$message({
+          showClose: true,
+          message: 'Oops, this is a wrong answer.',
+          type: 'error',
+        })
         this.$emit('handle-answer', false)
       }
     },

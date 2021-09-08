@@ -1,42 +1,46 @@
 <template>
   <div
     class="
+      result-container
       flex flex-col
-      justify-center
+      justify-around
       items-center
       p-5
       md:p-10
       lg:p-16
-      my-5
-      bg-indigo
-      text-white
-      rounded
-      w-11/12
-      md:w-2/3
-      lg:w-1/2
-      mx-auto
+      w-screen
+      h-screen
     "
   >
-    <h5 class="uppercase my-3 md:my-5 text-center">RESULTS</h5>
+    <h5 class="uppercase my-3 md:my-5 text-center">Quiz Result</h5>
+    <!-- description -->
     <h2
-      v-if="response_code > 7"
+      v-if="response_code > 6"
       class="font-bold text-center text-xl md:text-2xl lg:text-3xl"
     >
-      CONGRATS, YOU PASSED
+      <img src="~/assets/img/winner-brown.gif" alt="" class="m-0" />
+      Congratulations! <br />
+      <small> You are so good, we are proud of you 👏</small>
     </h2>
     <h2 v-else class="text-center font-bold text-xl md:text-2xl lg:text-3xl">
-      SORRY, YOU FAILED
+      Sorry, you fails <br />
+      <small> We know you try your best, fighting !</small>
     </h2>
-    <div class="text-center rounded my-3 p-5 md:p-10 text-indigo bg-white">
-      <small class="uppercase">FInal score</small>
-      <h3 class="text-7xl">{{ response_code }}</h3>
+    <!-- score -->
+    <div class="text-center">
+      <small class="uppercase tracking-widest">Your score</small>
+      <h3 class="text-7xl md:text-9xl">{{ response_code }}</h3>
     </div>
-    <div class="my-3">
+    <!-- information -->
+    <div class="quiz-info my-3">
       <p>Start at: {{ start_time }}</p>
       <p>Finish at: {{ finish_time }}</p>
       <p>Time : {{ time }}</p>
     </div>
-    <el-button @click="$router.go('/quiz')">Play again</el-button>
+    <!-- play again -->
+    <el-button class="btn-again" @click="$router.go('/quiz')"
+      >Play again</el-button
+    >
   </div>
 </template>
 
@@ -78,4 +82,22 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+* {
+  margin: 0;
+  font-family: 'Titan One', cursive;
+}
+.result-container {
+  background: #1d1e21;
+  color: white;
+}
+.btn-again {
+  margin: 10% 0;
+  font-size: 130%;
+  padding: 1% 5%;
+  border: 5px solid transparent;
+  border-radius: 15px;
+  background-color: #8fc0a9;
+  color: black;
+}
+</style>
