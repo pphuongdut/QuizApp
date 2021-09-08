@@ -40,9 +40,10 @@ export default {}
   .wrapper {
     width: 100vw;
     text-align: center;
+    letter-spacing: 10px;
     span {
-      -webkit-text-stroke-width: 1.25px;
-      -webkit-text-stroke-color: #000;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: #f2aaaa;
       font-size: 8vw;
       font-weight: bold;
       text-shadow: 0 0px #f3c623, 0 0px #f2aaaa;
@@ -61,14 +62,40 @@ export default {}
   }
   @keyframes jump {
     33% {
-      text-shadow: 0 60px #f37121, 0 150px #f2aaaa;
+      text-shadow: 0 30px #f37121, 0 50px #f2aaaa;
     }
     50% {
       transform: translate(0, 0) rotate(-4deg);
       text-shadow: 0 0px #8fc0a9, 0 0px #84a9ac;
     }
     66.67% {
-      text-shadow: 0 -60px #d54062, 0 -150px #8fc0a9;
+      text-shadow: 0 -30px #d54062, 0 -50px #8fc0a9;
+    }
+  }
+  .btn-start {
+    font-size: 200%;
+    padding: 1% 2%;
+    border: 5px solid transparent;
+    border-radius: 15px;
+    background-color: #8fc0a9;
+    position: relative;
+    &:hover {
+      border: 5px solid white;
+    }
+    &:before {
+      content: '👇';
+      font-size: 60px;
+      transform: scaleX(-1);
+      right: 0px;
+      top: -68px;
+      animation: up-down 1s infinite;
+      position: absolute;
+    }
+  }
+
+  @keyframes up-down {
+    50% {
+      margin-top: -20px;
     }
   }
 }
