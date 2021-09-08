@@ -37,6 +37,9 @@ export default {}
   box-sizing: border-box;
   position: relative;
   background-color: black;
+  min-width: 300px;
+  min-height: 500px;
+
   .wrapper {
     width: 100vw;
     text-align: center;
@@ -96,6 +99,16 @@ export default {}
   @keyframes up-down {
     50% {
       margin-top: -20px;
+    }
+  }
+  @media (max-width: 576px) {
+    .home-container {
+      max-height: 500px;
+      .wrapper {
+        span {
+          font-size: 56px;
+        }
+      }
     }
   }
 }

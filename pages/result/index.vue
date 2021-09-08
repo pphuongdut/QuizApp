@@ -91,6 +91,8 @@ export default {
 .result-container {
   background: #1d1e21;
   color: white;
+  min-width: 300px;
+  min-height: 500px;
 }
 .btn-again {
   margin: 10% 0;

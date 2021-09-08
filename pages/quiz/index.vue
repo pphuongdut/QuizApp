@@ -37,7 +37,7 @@
         :result="results[current_question]"
         @handle-answer="handleAnswer"
       />
-      <el-button class="btn-skip" @click="current_question++"> Next </el-button>
+      <el-button class="btn-skip" @click="changeQuestion"> Next </el-button>
     </div>
     <el-button v-else class="btn-result" @click="$router.push('/result')">
       You finished. Click to see result
@@ -104,21 +104,25 @@ export default {
         this.response_code++
       }
       // set time out to change question
-      await setTimeout(() => {
-        this.current_question++
-        if (this.current_question >= this.results.length) {
-          this.finishQuiz()
-        }
-      }, 1000)
+      await this.changeQuestion()
     },
     finishQuiz() {
       // save response code and finish time
+
       this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.response_code)
       this.$store.commit(quizMutations.SET.FINISH_TIME, this.getCurrentTime())
       this.$router.push('/result')
     },
     getCurrentTime() {
       return moment()
+    },
+    async changeQuestion() {
+      await setTimeout(() => {
+        this.current_question++
+        if (this.current_question >= this.results.length) {
+          this.finishQuiz()
+        }
+      }, 1000)
     },
   },
 }
@@ -129,6 +133,8 @@ export default {
   font-family: 'Titan One', cursive;
   background: #171c33;
   color: white;
+  min-width: 300px;
+  min-height: 500px;
   .btn-skip {
     margin: 10% 0;
     font-size: 130%;
