@@ -1,4 +1,4 @@
-# S-Blog
+# Quiz App
 
 ## Build Setup
 
