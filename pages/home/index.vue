@@ -10,14 +10,14 @@
     "
   >
     <div class="wrapper">
+      <span>0</span>
+      <span>H</span>
+      <span>M</span>
+      <span>Y</span>
       <span>Q</span>
       <span>U</span>
       <span>I</span>
       <span>Z</span>
-      <span>G</span>
-      <span>A</span>
-      <span>M</span>
-      <span>E</span>
     </div>
     <el-button class="btn-start" type="primary" @click="$router.push('/quiz')">
       Tap to play</el-button

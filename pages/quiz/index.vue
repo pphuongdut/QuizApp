@@ -1,6 +1,5 @@
 <template>
   <div
-    v-loading="$fetchState.pending"
     class="
       quiz-container
       flex flex-col
@@ -10,6 +9,14 @@
       w-screen
     "
   >
+    <div
+      v-if="timer"
+      class="count-time flex flex-col justify-center items-center show"
+    >
+      <b class="text-5xl md:text-7xl">GET READY ! </b>
+      <b class="text-7xl md:text-9xl">{{ timer }}</b>
+    </div>
+    <b class="my-3 md:my-5 text-center">Oh my quiz !</b>
     <div
       v-if="current_question < results.length"
       class="w-11/12 md:w-2/3 lg:w-1/2"
@@ -47,6 +54,7 @@ export default {
   },
   data() {
     return {
+      timer: 3,
       current_question: 0,
       response_code: 0,
       colors: [
@@ -69,6 +77,12 @@ export default {
         return state.quiz.results
       },
     }),
+  },
+  created() {
+    let timer = setInterval(() => {
+      this.timer--
+      if (this.timer == 0) clearInterval(timer)
+    }, 1000)
   },
   mounted() {
     this.$store.commit(quizMutations.SET.START_TIME, this.getCurrentTime())
@@ -126,6 +140,14 @@ export default {
     border-radius: 15px;
     background-color: #8fc0a9;
     color: black;
+  }
+  .show {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 10000000;
+    background: black;
   }
 }
 </style>
