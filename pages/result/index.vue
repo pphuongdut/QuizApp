@@ -36,6 +36,7 @@
       <p>Finish at: {{ finish_time }}</p>
       <p>Time : {{ time }}</p>
     </div>
+    <el-button @click="$router.go('/quiz')">Play again</el-button>
   </div>
 </template>
 

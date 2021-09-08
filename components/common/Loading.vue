@@ -1,6 +1,10 @@
 <template>
-  <div v-if="loading" class="loading">
-    <i class="el-icon-loading"></i>
+  <div v-if="loading" class="load-wrapp">
+    <div class="load w-screen h-screen flex justify-center items-center">
+      <div class="square-holder">
+        <div class="square"></div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -21,21 +25,28 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--color-special);
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  i {
-    font-size: 500%;
-    color: white;
+.load-wrapp {
+  .square {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: #4b9cdb;
   }
-  z-index: 99999;
+
+  .load .square {
+    animation: loading 1.5s cubic-bezier(0.17, 0.37, 0.43, 0.67) infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(70px, 0) rotate(360deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+  }
 }
 </style>
