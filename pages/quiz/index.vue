@@ -16,7 +16,7 @@
       <b class="text-5xl md:text-7xl">GET READY ! </b>
       <b class="text-7xl md:text-9xl">{{ timer }}</b>
     </div>
-    <b class="my-3 md:my-5 text-center">Oh my quiz !</b>
+    <b class="my-3 md:my-5 text-center">🏆 Oh my quiz !</b>
     <div
       v-if="current_question < results.length"
       class="w-11/12 md:w-2/3 lg:w-1/2"
@@ -94,14 +94,16 @@ export default {
     ...mapActions({
       getResults: quizActions.GET.RESULTS,
     }),
-    handleAnswer(isTrue) {
+    async handleAnswer(isTrue) {
       if (isTrue) {
         this.response_code++
       }
-      this.current_question++
-      if (this.current_question >= this.results.length) {
-        this.finishQuiz()
-      }
+      await setTimeout(() => {
+        this.current_question++
+        if (this.current_question >= this.results.length) {
+          this.finishQuiz()
+        }
+      }, 2000)
     },
     finishQuiz() {
       this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.response_code)
