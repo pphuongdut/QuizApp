@@ -39,7 +39,6 @@ export default {}
   background-color: black;
   min-width: 300px;
   min-height: 500px;
-
   .wrapper {
     width: 100vw;
     text-align: center;
