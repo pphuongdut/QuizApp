@@ -30,7 +30,7 @@ export default {
     width: 30px;
     height: 30px;
     border-radius: 4px;
-    background-color: #4b9cdb;
+    background-color: #8fc0a9;
   }
 
   .load .square {

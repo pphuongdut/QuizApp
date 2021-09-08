@@ -48,6 +48,7 @@
 import { mapState } from 'vuex'
 import moment from 'moment'
 export default {
+  // if user not yet play this game
   middleware: [
     ({ store, redirect }) => {
       const finish_time = store.state.quiz.finish_time

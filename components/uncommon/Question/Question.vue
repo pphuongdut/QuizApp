@@ -36,6 +36,7 @@ export default {
   computed: {},
   watch: {
     result: {
+      // always merge answers when result change
       handler() {
         this.mergeAnswers()
       },
@@ -48,6 +49,7 @@ export default {
   methods: {
     handleAnswer(item) {
       if (this.result.correct_answer == item) {
+        // show message correct answer
         this.$message({
           showClose: true,
           message: 'Congrats, correct answer.',
@@ -55,6 +57,7 @@ export default {
         })
         this.$emit('handle-answer', true)
       } else {
+        // show message wrong answer
         this.$message({
           showClose: true,
           message: 'Oops, this is a wrong answer.',
@@ -63,11 +66,13 @@ export default {
         this.$emit('handle-answer', false)
       }
     },
+    // merge correct answer with incorrect answers
     mergeAnswers() {
       let answers = [
         ...this.result.incorrect_answers,
         this.result.correct_answer,
       ]
+      // sort to mixture position of list answers
       answers.sort(function () {
         return 0.5 - Math.random()
       })

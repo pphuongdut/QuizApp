@@ -9,6 +9,7 @@
       w-screen
     "
   >
+    <!-- count down time -->
     <div
       v-if="timer"
       class="count-time flex flex-col justify-center items-center show"
@@ -16,7 +17,9 @@
       <b class="text-5xl md:text-7xl">GET READY ! </b>
       <b class="text-7xl md:text-9xl my-5">{{ timer }}</b>
     </div>
+    <!-- title quiz -->
     <b class="my-3 md:my-5 text-center">🏆 Oh my quiz !</b>
+    <!-- main content -->
     <div
       v-if="current_question < results.length"
       class="w-11/12 md:w-2/3 lg:w-1/2"
@@ -79,12 +82,14 @@ export default {
     }),
   },
   created() {
+    // count down to play
     let timer = setInterval(() => {
       this.timer--
       if (this.timer == 0) clearInterval(timer)
     }, 1000)
   },
   mounted() {
+    // get start time
     this.$store.commit(quizMutations.SET.START_TIME, this.getCurrentTime())
   },
   methods: {
@@ -98,6 +103,7 @@ export default {
       if (isTrue) {
         this.response_code++
       }
+      // set time out to change question
       await setTimeout(() => {
         this.current_question++
         if (this.current_question >= this.results.length) {
@@ -106,6 +112,7 @@ export default {
       }, 1000)
     },
     finishQuiz() {
+      // save response code and finish time
       this.$store.commit(quizMutations.SET.RESPONSE_CODE, this.response_code)
       this.$store.commit(quizMutations.SET.FINISH_TIME, this.getCurrentTime())
       this.$router.push('/result')
