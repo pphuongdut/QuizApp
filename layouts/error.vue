@@ -18,3 +18,8 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+* {
+  font-family: 'Titan One', cursive;
+}
+</style>
