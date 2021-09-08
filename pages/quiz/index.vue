@@ -1,24 +1,35 @@
 <template>
   <div
     v-loading="$fetchState.pending"
-    class="flex flex-col justify-center items-center h-screen w-screen"
+    class="
+      quiz-container
+      flex flex-col
+      justify-center
+      items-center
+      h-screen
+      w-screen
+    "
   >
     <div
       v-if="current_question < results.length"
-      class="w-full md:w-2/3 lg:w-1/2"
+      class="w-11/12 md:w-2/3 lg:w-1/2"
     >
-      <b class="text-green">
-        {{ current_question + 1 }} / {{ results.length }}
-      </b>
+      <span class="text-2xl md:text-5xl">
+        <b> Question {{ current_question + 1 }} </b>
+        <small>/ {{ results.length }}</small>
+      </span>
+      <el-progress
+        class="my-5"
+        :percentage="current_question * 10"
+        :color="colors"
+      ></el-progress>
       <Question
         :result="results[current_question]"
         @handle-answer="handleAnswer"
       />
-      <el-button type="text" @click="current_question++">
-        Skip question
-      </el-button>
+      <el-button class="btn-skip" @click="current_question++"> Next </el-button>
     </div>
-    <el-button v-else type="success" @click="$router.push('/result')">
+    <el-button v-else class="btn-result" @click="$router.push('/result')">
       You finished. Click to see result
     </el-button>
   </div>
@@ -38,6 +49,13 @@ export default {
     return {
       current_question: 0,
       response_code: 0,
+      colors: [
+        { color: '#f56c6c', percentage: 20 },
+        { color: '#e6a23c', percentage: 40 },
+        { color: '##èbc5a', percentage: 60 },
+        { color: '#1989fa', percentage: 80 },
+        { color: '#10b28e', percentage: 100 },
+      ],
     }
   },
   async fetch() {
@@ -83,4 +101,31 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.quiz-container {
+  background: #171c33;
+  color: white;
+  .btn-skip {
+    margin: 10% 0;
+    font-size: 130%;
+    padding: 1% 5%;
+    border: 5px solid transparent;
+    border-radius: 15px;
+    background-color: #8fc0a9;
+    color: black;
+    float: right;
+    &:hover {
+      border: 5px solid white;
+    }
+  }
+  .btn-result {
+    margin: 10% 0;
+    font-size: 130%;
+    padding: 1% 5%;
+    border: 5px solid transparent;
+    border-radius: 15px;
+    background-color: #8fc0a9;
+    color: black;
+  }
+}
+</style>

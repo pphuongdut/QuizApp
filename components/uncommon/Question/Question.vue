@@ -1,10 +1,10 @@
 <template>
   <div>
     <h3
-      class="text-xl md:text-2xl lg:text-3xl font-bold my-2 md:my-5 lg:my-10"
+      class="question text-xl md:text-3xl lg:text-4xl font-bold"
       v-html="result.question"
     ></h3>
-    <div class="flex flex-col">
+    <div class="answers-container flex flex-col">
       <el-button
         v-for="(item, index) in answers"
         :id="'answer' + index"
@@ -70,13 +70,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+* {
+  margin: 0;
+  font-family: 'Titan One', cursive;
+}
+.question {
+  line-height: 150%;
+  margin: 5% 0;
+}
 ::v-deep .el-button {
+  font-size: 150%;
   margin: 10px 0;
-}
-.correct {
-  background-color: green;
-}
-.wrong {
-  background: red;
+  padding: 10px;
+  background: transparent;
+  color: white;
+  border-radius: 10px;
+  border: 1px solid #ebc217;
 }
 </style>
